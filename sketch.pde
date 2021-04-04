@@ -9,7 +9,7 @@ float shutterAngle = 1.5;
 int framesN = 200;  
 int frameSamples = 5;
 
-class Elem{
+class Elem {
   float delta;
   float size = random(0.5, 2.5);
   float offset = random(0.2, 0.8);
@@ -18,7 +18,7 @@ class Elem{
     delta = delta_n;
   }
    
-  void show(){
+  void show() {
     float radius = 150 - 100 * cos(TWO_PI * time - size * size * offset);
     float x = 350 + radius * cos(delta * offset);
     float y = 350 - radius * sin(delta / offset);
@@ -52,16 +52,19 @@ void draw() {
     }
 
     loadPixels();
-    for (int i = 0; i < pixels.length; i++)
+    for (int i = 0; i < pixels.length; i++) {
       pixels[i] = 0xff << 24 | 
         int(res[i][0] * 1.0 / frameSamples) << 16 | 
         int(res[i][1] * 1.0 / frameSamples) << 8 | 
         int(res[i][2] * 1.0 / frameSamples);
+    }
     updatePixels();
 
     saveFrame("frame###.png");
     println(frameCount, "/", framesN);
+
     if (frameCount == framesN) exit();
+
   } else {
     time = mouseX * 1.0 / width;
     x = mouseY * 1.0 / height;
@@ -79,7 +82,7 @@ void setup() {
   }
 }
  
-void draw_n(){
+void draw_n() {
   background(#000000);
   for (int i = 0; i < elementsNum; i++) {
     array[i].show();
